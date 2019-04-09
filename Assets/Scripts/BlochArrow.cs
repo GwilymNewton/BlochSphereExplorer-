@@ -22,11 +22,11 @@ public class BlochArrow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        moveToBaseZero();
-        //moveToBaseOne();
+        //moveToBaseZero(); // AAKA POS Y
+        //moveToBaseOne(); //AKA NEG Y
         //movePosZ();
         //moveNegZ();
-        //movePosX();
+        movePosX();
         //moveNegX();
     }
 
@@ -161,11 +161,14 @@ public class BlochArrow : MonoBehaviour
 
     private void applyMatrix(Complex[,] matrix){
 
+        Debug.Log("Old: Alpha -> " + alpha + "beta -> " + beta);
+
         Complex a = Complex.Add(Complex.Multiply(matrix[0, 0], alpha), Complex.Multiply(matrix[1, 0], beta));
         Complex b = Complex.Add(Complex.Multiply(matrix[0, 1], alpha), Complex.Multiply(matrix[1, 1], beta));
 
         alpha = a;
         beta = b;
+        Debug.Log("New: Alpha -> " + alpha + "beta -> " + beta);
 
     }
 
@@ -174,6 +177,9 @@ public class BlochArrow : MonoBehaviour
         Debug.Log("Entered: " + other.gameObject.name);
         IGate gate = (IGate)other.gameObject.GetComponent(other.gameObject.name);
         Complex[,] matrix = gate.GetMatrix();
+
+        Debug.Log("| " + matrix[0, 0] + " " + matrix[1, 0] + "|" + System.Environment.NewLine + "| " + matrix[0, 1] + " " + matrix[1, 1] + "|");
+
         applyMatrix(matrix);
     }
 

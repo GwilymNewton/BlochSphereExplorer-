@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
-public class PauliX : MonoBehaviour,IGate {
+public class PauliY : MonoBehaviour,IGate {
 
     // Use this for initialization
     void Start()
@@ -57,15 +57,16 @@ public class PauliX : MonoBehaviour,IGate {
         /*
          *X,Y
          *
-         *|0 1|
-         *|1 0|
+         *|1  0|
+         *|0 -1|
          *
          */
-        matrix[0, 0] = Complex.Zero;
-        matrix[1, 0] = Complex.One;
-        matrix[0, 1] = Complex.One;
-        matrix[1, 1] = Complex.Zero;
+        matrix[0, 0] = Complex.One;
+        matrix[1, 0] = Complex.Zero;
+        matrix[0, 1] = Complex.Zero;
+        matrix[1, 1] = Complex.Negate(Complex.One);
 
+        //Debug.Log(matrix);
 
         return matrix;
 
