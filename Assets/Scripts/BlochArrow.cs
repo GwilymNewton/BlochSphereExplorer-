@@ -15,16 +15,31 @@ public class BlochArrow : MonoBehaviour
     public GameObject rotator;
 
 
+    public float speed;
+
+    public Rigidbody rb;
+
     // Use this for initialization
     void Start()
     {
-        //moveToBaseZero();
+        moveToBaseZero();
         //moveToBaseOne();
         //movePosZ();
         //moveNegZ();
         //movePosX();
-        moveNegX();
+        //moveNegX();
     }
+
+    void FixedUpdate()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+        rb.AddForce(movement * speed);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -37,7 +52,7 @@ public class BlochArrow : MonoBehaviour
 
             updateArrow(t, p);
 
-        Debug.Log("Update Theta: " + theta.ToString() + "("+t+")  Phi" + phi.ToString() + "(" + p + ")");
+        //Debug.Log("Update Theta: " + theta.ToString() + "("+t+")  Phi" + phi.ToString() + "(" + p + ")");
     
     
     
@@ -125,10 +140,6 @@ public class BlochArrow : MonoBehaviour
     {
 
         // Translation notes Bloch uses Z as vertical, Unity uses Y. Defaulting to unity
-        // Unity Y rotation 0 is pointing right, Bloach is putting towwards you. Hence we adjust.
-        // AND, AND WAIT FOR IT, they have a differenat idea of what clockwise is.
-        //HENCE
-        p = -p + 90;
 
 
         //(t,p) -> (t,p)
@@ -143,10 +154,29 @@ public class BlochArrow : MonoBehaviour
 
         UnityEngine.Vector3 rotation = new Vector3(t, p, 0f);
 
-        Debug.Log(rotation);
+        //Debug.Log(rotation);
 
         rotator.transform.eulerAngles = rotation;
     }
+
+    private void applyMatrix(Complex[,] matrix){
+
+        Complex a = Complex.Add(Complex.Multiply(matrix[0, 0], alpha), Complex.Multiply(matrix[1, 0], beta));
+        Complex b = Complex.Add(Complex.Multiply(matrix[0, 1], alpha), Complex.Multiply(matrix[1, 1], beta));
+
+        alpha = a;
+        beta = b;
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Entered: " + other.gameObject.name);
+        Complex[,] matrix = other.gameObject.GetComponent<PauliX>().getMatrix();
+        applyMatrix(matrix);
+    }
+
+
 
 
 }
