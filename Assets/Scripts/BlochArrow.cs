@@ -172,7 +172,8 @@ public class BlochArrow : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Entered: " + other.gameObject.name);
-        Complex[,] matrix = other.gameObject.GetComponent<PauliX>().getMatrix();
+        IGate gate = (IGate)other.gameObject.GetComponent(other.gameObject.name);
+        Complex[,] matrix = gate.GetMatrix();
         applyMatrix(matrix);
     }
 
