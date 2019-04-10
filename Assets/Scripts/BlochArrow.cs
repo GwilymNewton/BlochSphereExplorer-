@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Numerics;
 using Vector3 = UnityEngine.Vector3;
+using UnityEngine.UI;
 
 public class BlochArrow : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class BlochArrow : MonoBehaviour
     public float speed;
 
     public Rigidbody rb;
+
+    public Text state_text;
 
     // Use this for initialization
     void Start()
@@ -53,9 +56,10 @@ public class BlochArrow : MonoBehaviour
             updateArrow(t, p);
 
         //Debug.Log("Update Theta: " + theta.ToString() + "("+t+")  Phi" + phi.ToString() + "(" + p + ")");
-    
-    
-    
+        state_text.text = "α = " + alpha.ToString() + ", β =  " + beta.ToString();
+
+
+
     }
 
 
