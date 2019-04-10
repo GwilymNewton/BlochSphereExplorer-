@@ -22,7 +22,7 @@ public class BlochArrow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //moveToBaseZero(); // AAKA POS Y
+        moveToBaseZero(); // AAKA POS Y
         //moveToBaseOne(); //AKA NEG Y
         //movePosZ();
         //moveNegZ();
@@ -86,37 +86,37 @@ public class BlochArrow : MonoBehaviour
     }
 
 
-    void moveToBaseZero()
+    public void moveToBaseZero()
     {
         alpha = new Complex(1, 0);
         beta = new Complex(0, 0);
     }
 
-    void moveToBaseOne()
+    public void moveToBaseOne()
     {
         alpha = new Complex(0, 0);
         beta = new Complex(1, 0);
     }
 
-    void movePosZ()
+    public void movePosZ()
     {
         alpha = Complex.Divide(Complex.One, Complex.Sqrt(2));
         beta = Complex.Divide(Complex.ImaginaryOne, Complex.Sqrt(2));
     }
 
-    void moveNegZ()
+    public void moveNegZ()
     {
         alpha = Complex.Divide(Complex.One, Complex.Sqrt(2));
         beta = Complex.Divide(Complex.Negate(Complex.ImaginaryOne), Complex.Sqrt(2));
     }
 
-    void movePosX()
+    public void movePosX()
     {
         alpha = Complex.Divide(Complex.One, Complex.Sqrt(2));
         beta = Complex.Divide(Complex.One, Complex.Sqrt(2));
     }
 
-    void moveNegX()
+    public void moveNegX()
     {
         alpha = Complex.Divide(Complex.One, Complex.Sqrt(2));
         beta = Complex.Divide(Complex.Negate(Complex.One), Complex.Sqrt(2));
