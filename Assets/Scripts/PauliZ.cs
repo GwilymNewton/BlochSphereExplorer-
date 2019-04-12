@@ -57,17 +57,16 @@ public class PauliZ : MonoBehaviour,IGate {
 
 
         /*
-         * THIS IS ACTUALY a PAULI Y gate, but we are using unity's coords which swap Y&Z
          *X,Y
-        *
-        *|0 -i|
-        *|i  0|
-        *
-        */
-        matrix[0, 0] = Complex.Zero;
-        matrix[1, 0] = Complex.Negate(Complex.ImaginaryOne);
-        matrix[0, 1] = Complex.ImaginaryOne;
-        matrix[1, 1] = Complex.Zero;
+         *
+         *|1  0|
+         *|0 -1|
+         *
+         */
+        matrix[0, 0] = Complex.One;
+        matrix[1, 0] = Complex.Zero;
+        matrix[0, 1] = Complex.Zero;
+        matrix[1, 1] = Complex.Negate(Complex.One);
 
         //Debug.Log(matrix);
 

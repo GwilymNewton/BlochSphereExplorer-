@@ -25,12 +25,7 @@ public class BlochArrow : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        moveToBaseZero(); // AAKA POS Y
-        //moveToBaseOne(); //AKA NEG Y
-        //movePosZ();
-        //moveNegZ();
-        movePosX();
-        //moveNegX();
+        moveToBaseZero(); // AAKA POS Z
     }
 
     void FixedUpdate()
@@ -90,25 +85,25 @@ public class BlochArrow : MonoBehaviour
     }
 
 
-    public void moveToBaseZero()
+    public void moveToBaseZero() //POS Z
     {
         alpha = new Complex(1, 0);
         beta = new Complex(0, 0);
     }
 
-    public void moveToBaseOne()
+    public void moveToBaseOne() // Neg Z
     {
         alpha = new Complex(0, 0);
         beta = new Complex(1, 0);
     }
 
-    public void movePosZ()
+    public void movePosY()
     {
         alpha = Complex.Divide(Complex.One, Complex.Sqrt(2));
         beta = Complex.Divide(Complex.ImaginaryOne, Complex.Sqrt(2));
     }
 
-    public void moveNegZ()
+    public void moveNegY()
     {
         alpha = Complex.Divide(Complex.One, Complex.Sqrt(2));
         beta = Complex.Divide(Complex.Negate(Complex.ImaginaryOne), Complex.Sqrt(2));
@@ -143,7 +138,7 @@ public class BlochArrow : MonoBehaviour
     void updateArrow(int t, int p)
     {
 
-        // Translation notes Bloch uses Z as vertical, Unity uses Y. Defaulting to unity
+        // Translation notes Bloch uses Z as vertical, Unity uses Y. Defaulting to bloch
 
 
         //(t,p) -> (t,p)
@@ -154,6 +149,8 @@ public class BlochArrow : MonoBehaviour
         //px(90,0)= 90,90
         //nx(90,180) = 90,-90
 
+
+        p += 90;
 
 
         UnityEngine.Vector3 rotation = new Vector3(t, p, 0f);

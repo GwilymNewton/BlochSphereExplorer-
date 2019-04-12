@@ -55,17 +55,16 @@ public class PauliY : MonoBehaviour,IGate {
 
 
         /*
-         *X,Y
-         *
-         *|1  0|
-         *|0 -1|
-         *
-         */
-        matrix[0, 0] = Complex.One;
-        matrix[1, 0] = Complex.Zero;
-        matrix[0, 1] = Complex.Zero;
-        matrix[1, 1] = Complex.Negate(Complex.One);
-
+        *X,Y
+        *
+        *| 0 - i |
+        *| i  0 |
+        *
+        */
+        matrix[0, 0] = Complex.Zero;
+        matrix[1, 0] = Complex.Negate(Complex.ImaginaryOne);
+        matrix[0, 1] = Complex.ImaginaryOne;
+        matrix[1, 1] = Complex.Zero;
         //Debug.Log(matrix);
 
         return matrix;
