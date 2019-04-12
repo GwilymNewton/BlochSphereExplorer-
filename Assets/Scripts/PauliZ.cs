@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Application;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
 public class PauliZ : MonoBehaviour,IGate {
+
+    public GateType type = GateType.Single;
 
     // Use this for initialization
     void Start()
@@ -48,6 +51,11 @@ public class PauliZ : MonoBehaviour,IGate {
     void Update () {
 		
 	}
+
+    public GateType GetGType()
+    {
+        return type;
+    }
 
     public Complex[,] GetMatrix(){
 

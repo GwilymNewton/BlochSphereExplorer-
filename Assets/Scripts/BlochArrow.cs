@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Numerics;
 using Vector3 = UnityEngine.Vector3;
 using UnityEngine.UI;
+using Application;
+using System;
 
 public class BlochArrow : MonoBehaviour
 {
@@ -173,15 +175,49 @@ public class BlochArrow : MonoBehaviour
 
     }
 
+    private void Measure(){
+
+        Complex pa = Complex.Pow(alpha, 2);
+        Complex pb = Complex.Pow(beta, 2);
+
+        Debug.Log("Cplx: P(A) -> " + pa + "P(B) -> " + pb);
+
+        double rpa = Math.Abs( pa.Real);
+        double rpb = Math.Abs(pb.Real);
+        Debug.Log("Real: P(A) -> " + pa + "P(B) -> " + pb);
+
+        double rnd = UnityEngine.Random.Range(1f, 0f);
+
+        if(rnd<=rpa){
+            moveToBaseZero();
+        }
+        else
+        {
+            moveToBaseOne();
+        }
+
+
+    }
+
     void OnTriggerEnter(Collider other)
     {
         Debug.Log("Entered: " + other.gameObject.name);
         IGate gate = (IGate)other.gameObject.GetComponent(other.gameObject.name);
-        Complex[,] matrix = gate.GetMatrix();
 
-        Debug.Log("| " + matrix[0, 0] + " " + matrix[1, 0] + "|" + System.Environment.NewLine + "| " + matrix[0, 1] + " " + matrix[1, 1] + "|");
+        if(gate.GetGType().Equals(GateType.Single))
+        {
+            Complex[,] matrix = gate.GetMatrix();
 
-        applyMatrix(matrix);
+            Debug.Log("| " + matrix[0, 0] + " " + matrix[1, 0] + "|" + System.Environment.NewLine + "| " + matrix[0, 1] + " " + matrix[1, 1] + "|");
+
+            applyMatrix(matrix);
+        }
+        else if(gate.GetGType().Equals(GateType.Measurement))
+        {
+            Measure();
+
+        }
+
     }
 
 
