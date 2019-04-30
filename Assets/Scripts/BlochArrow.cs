@@ -52,17 +52,49 @@ public class BlochArrow : MonoBehaviour
 
             updateArrow(t, p);
 
+
+
+        string nice_a = ComplexToString(alpha);
+        string nice_b = ComplexToString(beta);
         //Debug.Log("Update Theta: " + theta.ToString() + "("+t+")  Phi" + phi.ToString() + "(" + p + ")");
-        state_text.text = "α = " + alpha.ToString() + ", β =  " + beta.ToString();
+        state_text.text = "|φ> = " + nice_a + "•| 0 > +" + nice_b + " • | 1 > ";
+
+
 
 
 
     }
 
+    string ComplexToString(Complex x)
+    {
+
+        Debug.Log(x.ToString() + " P:" + x.Phase);
+        string nice = "";
+        if (x.Phase.Equals(0) || x.Phase.Equals(Math.PI))
+        {
+            //Numnber is real.
+            nice = ""+ Math.Round(x.Real, 2);
+            return nice;
+
+        }
+
+        if (x.Phase.Equals((Math.PI / 2)) || x.Phase.Equals((Math.PI / -2)))
+        {
+            nice = "" + Math.Round(x.Imaginary, 2) + "i";
+            return nice;
+
+        }
+
+        // we have real and imgainary parts
+        nice = "" + Math.Round(x.Real, 2) + " + " + Math.Round(x.Imaginary, 2) + "i";
+        return nice;
+    }
 
 
 
-    Complex CalcTheta()
+
+
+        Complex CalcTheta()
     {
         Complex t = 0;
 
